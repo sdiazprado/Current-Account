@@ -192,15 +192,33 @@ with tab4:
     else:
         st.info("Please select at least two variables to generate the correlation matrix.")
 
-# --- AUTHOR LINK ---
-st.sidebar.markdown(
-    f"""
-    <div style="text-align: center;">
-        <a href="https://github.com/sdiazprado" target="_blank" style="text-decoration: none; color: gray; font-size: 14px;">
-            📁 Created by: sdiazprado
-        </a>
+# --- CUSTOM FOOTER ---
+st.markdown(
+    """
+    <style>
+    .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: transparent;
+        color: gray;
+        text-align: right;
+        padding-right: 20px;
+        padding-bottom: 10px;
+        font-size: 12px;
+        z-index: 1000;
+    }
+    .footer a {
+        color: #007bff;
+        text-decoration: none;
+    }
+    </style>
+    <div class="footer">
+        Created by <a href="https://github.com/sdiazprado" target="_blank">sdiazprado</a>
     </div>
-    """, 
+    """,
     unsafe_allow_html=True
 )
+
 
