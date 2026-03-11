@@ -122,6 +122,44 @@ with tab1:
         else:
             st.warning("No data available.")
 
+# ==========================================
+    # NUEVA SECCIÓN: MULTIVARIABLE COMPARISON
+    # ==========================================
+    st.divider()
+    st.subheader("Multivariable Deep Dive")
+    st.markdown("Compare multiple indicators simultaneously to identify structural economic changes over a specific period.")
+    
+    col_c2, col_v2 = st.columns([1, 2])
+    with col_c2:
+        # Pongo a China y México por defecto para facilitar tus cruces analíticos
+        t1_multi_c = st.multiselect("Select Countries:", options=unique_countries, default=['China', 'Mexico'], key="t1_multi_c")
+    with col_v2:
+        t1_multi_v = st.multiselect("Select Multiple Variables:", options=graphable_vars, default=[graphable_vars[0], graphable_vars[1]], format_func=format_var, key="t1_multi_v")
+        
+    col_y1_m, col_y2_m, _ = st.columns([1, 1, 2])
+    with col_y1_m:
+        t1_start_m = st.selectbox("Start Year:", options=anios_asc, index=10, key="t1_start_m") # Default más al centro
+    with col_y2_m:
+        t1_end_m = st.selectbox("End Year:", options=anios_asc, index=len(anios_asc)-1, key="t1_end_m")
+
+    if t1_start_m > t1_end_m:
+        st.error("⚠️ The Start Year cannot be greater than the End Year.")
+    elif t1_multi_c and t1_multi_v:
+        df_multi = df[df['country_name'].isin(t1_multi_c)].copy()
+        df_multi = df_multi[(df_multi['year'] >= t1_start_m) & (df_multi['year'] <= t1_end_m)]
+        
+        if not df_multi.empty:
+            # Iteramos sobre cada variable seleccionada para crear un gráfico independiente
+            for var in t1_multi_v:
+                df_var = df_multi.dropna(subset=[var, 'year'])
+                if not df_var.empty:
+                    fig_m = px.line(df_var, x='year', y=var, color='country_name', markers=True, template="simple_white", title=f"Evolution of {format_var(var)}")
+                    # hovermode="x unified" dibuja una línea vertical útil para comparar países en un mismo año
+                    fig_m.update_layout(xaxis_title="", yaxis_title=format_var(var), hovermode="x unified") 
+                    st.plotly_chart(fig_m, use_container_width=True)
+                else:
+                    st.warning(f"No data available for {format_var(var)} in this selection.")
+
 # --- TAB 2: CROSS-SECTIONAL ---
 with tab2:
     st.subheader("Cross-Sectional Distribution")
@@ -204,5 +242,6 @@ with tab5:
             st.warning("Not enough clean data for ML.")
     else:
         st.error(f"Target '{target}' not found.")
+
 
 
