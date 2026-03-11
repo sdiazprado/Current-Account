@@ -85,8 +85,8 @@ st.divider()
 # 4. TABS STRUCTURE (CORREGIDO: Ahora incluye la pestaña 5)
 tab1, tab2, tab3, tab4, tab5 = st.tabs([
     "📈 1. Time Series", 
-    "📊 2. Cross-Sectional Snapshot", 
-    "🔍 3. Bivariate (Scatter)", 
+    "📊 2. Cross-Sectional", 
+    "🔍 3. Scatter", 
     "🧮 4. Correlation Matrix",
     "🤖 5. ML Insights"
 ])
@@ -204,4 +204,5 @@ with tab5:
             st.warning("Not enough clean data for ML.")
     else:
         st.error(f"Target '{target}' not found.")
+
 
