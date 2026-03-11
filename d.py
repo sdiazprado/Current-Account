@@ -59,8 +59,8 @@ st.divider()
 # 4. TABS STRUCTURE
 tab1, tab2, tab3, tab4 = st.tabs([
     "📈 1. Time Series", 
-    "📊 2. Cross-Sectional Snapshot", 
-    "🔍 3. Bivariate (Scatter)", 
+    "📊 2. Cross-Sectional", 
+    "🔍 3. Scatter", 
     "🧮 4. Correlation Matrix"
 ])
 
@@ -191,3 +191,4 @@ with tab4:
         st.plotly_chart(fig4, use_container_width=True)
     else:
         st.info("Please select at least two variables to generate the correlation matrix.")
+
