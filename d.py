@@ -192,22 +192,15 @@ with tab4:
     else:
         st.info("Please select at least two variables to generate the correlation matrix.")
 
-# --- SIDEBAR CREDITS ---
-with st.sidebar:
-    st.divider()
-    st.markdown("### 👨‍💻 Author")
-    
-    # Tu usuario de GitHub
-    github_user = "sdiazprado"
-    
-    # Mostramos tu foto de perfil de GitHub de forma dinámica
-    st.image(f"https://github.com/{github_user}.png", width=100)
-    
-    st.markdown(f"**Created by:** [{github_user}](https://github.com/{github_user})")
-    
-    st.caption("Economics Student at UNAM | Central Bank of Mexico")
-    
-    st.divider()
-    st.info("This tool is part of a research project on Global Imbalances and Current Account dynamics.")
-
+# --- AUTHOR LINK ---
+st.sidebar.markdown(
+    f"""
+    <div style="text-align: center;">
+        <a href="https://github.com/sdiazprado" target="_blank" style="text-decoration: none; color: gray; font-size: 14px;">
+            📁 Created by: sdiazprado
+        </a>
+    </div>
+    """, 
+    unsafe_allow_html=True
+)
 
