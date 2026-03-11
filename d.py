@@ -192,3 +192,39 @@ with tab4:
     else:
         st.info("Please select at least two variables to generate the correlation matrix.")
 
+# --- TAB 5: MACHINE LEARNING (FEATURE IMPORTANCE) ---
+with tab5:
+    st.subheader("Machine Learning Insights: Feature Importance")
+    st.markdown("Using **Random Forest** to identify predictive power over Current Account Balance.")
+    
+    target = 'ca_gdp' # Asegúrate que este nombre sea el exacto en tu Excel
+    
+    if target in df.columns:
+        
+        features = [col for col in graphable_vars if col != target]
+        df_ml = df[features + [target]].dropna()
+            
+        # Definimos qué variables NO queremos que el modelo use para no hacer trampa
+        exclude_list = [target, 'ca_usd', 'current_account_usd', 'ca_gdp'] # Añade aquí los nombres exactos de las variables de CA que tengas
+        
+        features = [col for col in graphable_vars if col not in exclude_list]
+
+        if not df_ml.empty:
+            X, y = df_ml[features], df_ml[target]
+            model = RandomForestRegressor(n_estimators=100, random_state=42)
+            model.fit(X, y)
+            
+            importances = pd.DataFrame({
+                'Variable': [format_var(f) for f in features],
+                'Importance': model.feature_importances_
+            }).sort_values(by='Importance', ascending=True)
+            
+            fig5 = px.bar(importances.tail(10), x='Importance', y='Variable', orientation='h', title="Top 10 Influential Variables", template="simple_white", color='Importance')
+            st.plotly_chart(fig5, use_container_width=True)
+            st.info("💡 **Interpretation:** Variables with higher scores are key candidates for your econometric model.")
+        else:
+            st.warning("Not enough clean data for ML.")
+    else:
+        st.error(f"Target '{target}' not found.")
+
+
