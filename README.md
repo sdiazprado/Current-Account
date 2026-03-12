@@ -8,7 +8,7 @@ Esta herramienta analítica, desarrollada en **Python** utilizando **Streamlit**
 
 * **Análisis Temporal y Transversal:** Evolución histórica y distribución global de indicadores macroeconómicos (PIB, Consumo, Inversión, Activos Externos Netos, etc.).
 * **Agrupación Multivariable Inteligente:** Motor de visualización que clasifica automáticamente las variables seleccionadas por su escala (tasas, valores nominales, índices) para permitir comparaciones estructurales sin distorsión visual.
-* **Relaciones Causal-Estadísticas (OLS & Diferencias):** Visualización bivariada con regresiones lineales, incluyendo transformaciones de **Primeras Diferencias (Δ)** para aislar shocks económicos, controlar la heterogeneidad no observada y mitigar el sesgo de variables omitidas.
+* **Relaciones Causal-Estadísticas (OLS & Diferencias):** Visualización bivariada con regresiones lineales.
 * **Machine Learning (Feature Importance):** Integración de un modelo *Random Forest Regressor* entrenado en tiempo real para rankear el poder predictivo de las variables sobre la Cuenta Corriente, incorporando filtros anti *data-leakage*.
 * **Diagnóstico de Multicolinealidad:** Generación dinámica de matrices de correlación de Pearson para la validación previa de modelos econométricos.
 
